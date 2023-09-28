@@ -17,6 +17,11 @@ inputs:
   pattern:
     description: "Glob pattern of files to match. (./migrations/*)"
     required: true
+  upload-to-github:
+    description: "Comment on the opening PR with Squawk's results"
+    required: true
+    type: boolean
+    default: true
 
 runs:
   using: "composite"
@@ -29,5 +34,5 @@ runs:
         export SQUAWK_GITHUB_REPO_OWNER=$(jq --raw-output .repository.owner.login "$GITHUB_EVENT_PATH")
         export SQUAWK_GITHUB_REPO_NAME=$(jq --raw-output .repository.name "$GITHUB_EVENT_PATH")
         export SQUAWK_GITHUB_PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        squawk --verbose upload-to-github $(compgen -G ${{inputs.pattern}})
+        squawk --verbose ${{ inputs.upload-to-github && upload-to-github }} $(compgen -G ${{inputs.pattern}})
       shell: bash

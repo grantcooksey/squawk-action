@@ -16,3 +16,4 @@ jobs:
       with:
         pattern: "test/multiple-safe/*.sql"
         version: "latest"
+        upload-to-github: false
