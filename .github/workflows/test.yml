@@ -29,6 +29,8 @@ jobs:
         pattern: "test/one-failure/*.sql"
         version: "latest"
         upload-to-github: false
+    - name: The job has failed
+      if: ${{ failure() }}
     - name: migration handles migrations with multiple failures
       uses: ./
       with:
