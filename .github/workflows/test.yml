@@ -11,9 +11,27 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: migration handles multiple safe migrations
+    - name: migration handles safe migrations
       uses: ./
       with:
         pattern: "test/multiple-safe/*.sql"
+        version: "latest"
+        upload-to-github: false
+    - name: empty migration
+      uses: ./
+      with:
+        pattern: "test/empty/*.sql"
+        version: "latest"
+        upload-to-github: false
+    - name: migration handles migrations with one failure
+      uses: ./
+      with:
+        pattern: "test/one-failure/*.sql"
+        version: "latest"
+        upload-to-github: false
+    - name: migration handles migrations with multiple failures
+      uses: ./
+      with:
+        pattern: "test/multiple-failures/*.sql"
         version: "latest"
         upload-to-github: false
