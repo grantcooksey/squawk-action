@@ -15,4 +15,3 @@ jobs:
       with:
         pattern: "test/one-failure/*.sql"
         version: "latest"
-        upload-to-github: true
